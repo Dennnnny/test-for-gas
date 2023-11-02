@@ -57,7 +57,7 @@ contract ERC721Test is Test {
     assertEq(erc721.balanceOf(user1),mintTimes);
   }
 
-  function testAMint() public {
+  function test721AMint() public {
     erc721a.mint(user2, mintTimes);
 
     assertEq(erc721a.balanceOf(user2), mintTimes);
@@ -70,7 +70,9 @@ contract ERC721Test is Test {
     erc721.transfer(user1, user3, 0);
     assertEq(erc721.balanceOf(user1), 0);
     assertEq(erc721.balanceOf(user3), 1);
+  }
 
+  function test721ATransfer() public {
     erc721a.mint(user2, 1);
     assertEq(erc721a.balanceOf(user2), 1);
     assertEq(erc721a.balanceOf(user4), 0);
@@ -85,12 +87,13 @@ contract ERC721Test is Test {
     vm.prank(user1);
     erc721.approve(user3, 0);
     assertEq(erc721.getApproved(0), user3);
+  }
 
+  function test721aApprove() public {
     erc721a.mint(user2, 1);
     vm.prank(user2);
     erc721a.approve(user4, 0);
     assertEq(erc721a.getApproved(0), user4);
-
   }
 
 }

@@ -1,0 +1,6 @@
+ERC721Test:test721AMint() (gas: 99899)
+ERC721Test:test721ATransfer() (gas: 117576)
+ERC721Test:test721aApprove() (gas: 111211)
+ERC721Test:testApprove() (gas: 121357)
+ERC721Test:testMint() (gas: 1136484)
+ERC721Test:testTransfer() (gas: 112226)
