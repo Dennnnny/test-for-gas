@@ -42,7 +42,7 @@ contract ERC721Test is Test {
   address user3 = makeAddr("user3");
   address user4 = makeAddr("user4");
 
-  uint256 mintTimes = 10;
+  uint256 mintTimes = 100;
 
   function setUp() public{
     erc721 = new MY_ERC721();
@@ -64,22 +64,31 @@ contract ERC721Test is Test {
   }
 
   function testTransfer() public {
-    erc721.mint(user1, 0);
-    assertEq(erc721.balanceOf(user1), 1);
+    uint256 amount = 10;
+    uint256 target = 5;
+    for (uint256 index = 0; index < amount; index++) {  
+      erc721.mint(user1, index);
+    }
+    assertEq(erc721.balanceOf(user1), amount);
     assertEq(erc721.balanceOf(user3), 0);
-    erc721.transfer(user1, user3, 0);
-    assertEq(erc721.balanceOf(user1), 0);
+    erc721.transfer(user1, user3, target);
+    assertEq(erc721.balanceOf(user1), amount - 1);
     assertEq(erc721.balanceOf(user3), 1);
+    assertEq(erc721.ownerOf(target), user3);
+
   }
 
   function test721ATransfer() public {
-    erc721a.mint(user2, 1);
-    assertEq(erc721a.balanceOf(user2), 1);
+    uint256 amount = 10;
+    uint256 target = 5;
+    erc721a.mint(user2, amount);
+    assertEq(erc721a.balanceOf(user2), amount);
     assertEq(erc721a.balanceOf(user4), 0);
     vm.prank(user2);
-    erc721a.transfer(user2, user4, 0);
-    assertEq(erc721a.balanceOf(user2), 0);
+    erc721a.transfer(user2, user4, target);
+    assertEq(erc721a.balanceOf(user2), amount - 1);
     assertEq(erc721a.balanceOf(user4), 1);
+    assertEq(erc721a.ownerOf(target), user4);
   }
 
   function testApprove() public {
